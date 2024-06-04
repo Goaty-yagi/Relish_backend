@@ -34,7 +34,7 @@ SECRET_KEY = getenv('DJANGO_SECRET_KEY')
 DEBUG = True
 
 ALLOWED_HOSTS = getenv('DJANGO_ALLOWED_HOSTS',
-                       '127.0.0.1,localhost').split(',')
+                       '127.0.0.1,localhost,0.0.0.0').split(',')
 
 
 # Application definition
@@ -176,11 +176,11 @@ DJOSER = {
     'USER_CREATE_PASSWORD_RETYPE': True,
     'PASSWORD_RESET_CONFIRM_RETYPE': True,
     'TOKEN_MODEL': None,
-    'SOCIAL_AUTH_ALLOWED_REDIRECT_URIS': getenv('REDIRECT_URLS').split(',')
+    'SOCIAL_AUTH_ALLOWED_REDIRECT_URIS': getenv('REDIRECT_URLS','').split(',')
 }
 
 AUTH_COOKIE = 'access'
-AUTH_COOKIE_MAX_AGE = 60 * 60 * 24 * 30 #30 days for refresh token
+AUTH_COOKIE_MAX_AGE = 60 * 60 * 24 * 30  # 30 days for refresh token
 AUTH_COOKIE_SECURE = getenv('AUTH_COOKIE_SECURE', 'True') == 'True'
 AUTH_COOKIE_HTTP_ONLY = True
 AUTH_COOKIE_PATH = '/'
@@ -190,7 +190,7 @@ SIMPLE_JWT = {
     'SIGNING_KEY': SECRET_KEY,
     'ACCESS_TOKEN_LIFETIME': timedelta(seconds=300),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=30),
-    'ROTATE_REFRESH_TOKENS' : True,
+    'ROTATE_REFRESH_TOKENS': True,
     'BLACKLIST_AFTER_ROTATION': True,
     'UPDATE_LAST_LOGIN': True,
     'USER_ID_FIELD': 'UID',
@@ -214,7 +214,7 @@ SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {
 }
 SOCIAL_AUTH_FACEBOOK_API_VERSION = '2.10'
 
-SOCIAL_AUTH_INSTAGRAM_KEY =getenv('FACEBOOK_AUTH_KEY')
+SOCIAL_AUTH_INSTAGRAM_KEY = getenv('FACEBOOK_AUTH_KEY')
 SOCIAL_AUTH_INSTAGRAM_SECRET = getenv('FACEBOOK_AUTH_SECRET_KEY')
 
 SOCIAL_AUTH_AMAZON_KEY = getenv('SOCIAL_AUTH_AMAZON_KEY')
@@ -241,5 +241,5 @@ VERIFICATION_URL = getenv('VERIFICATION_URL')
 PASSWORD_CHANGE_URL = getenv('PASSWORD_CHANGE_URL')
 
 DEFAULT_FROM_EMAIL = getenv('EMAIL_HOST_USER')
-DOMAIN  = getenv('DOMAIN') # for djoser email template
+DOMAIN = getenv('DOMAIN')  # for djoser email template
 SITE_NAME = 'Full_Auth'  # for djoser email template
