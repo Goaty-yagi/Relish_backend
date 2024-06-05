@@ -1,0 +1,16 @@
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[user]
+	name = Goaty-yagi
+	email = 60104559+Goaty-yagi@users.noreply.github.com
+[credential]
+	helper = "!f() { /root/.vscode-server/bin/e4503b30fc78200f846c62cf8091b76ff5547662/node /tmp/vscode-remote-containers-9337afaf6432853cbf92c93a8b94983fe6c47a22.js $*; }; f"
+[http]
+	postBuffer = 157286400
+[pull]
+	ff = only
+[init]
+	defaultBranch = main

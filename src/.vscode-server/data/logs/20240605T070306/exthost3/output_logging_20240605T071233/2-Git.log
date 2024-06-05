@@ -1,0 +1,25 @@
+[2024-06-05T07:12:34.312Z] Log level: Info
+[2024-06-05T07:12:34.319Z] [info] Validating found git in: git
+[2024-06-05T07:12:34.348Z] [info] Using git 2.20.1 from git
+[2024-06-05T07:12:34.418Z] > git rev-parse --show-toplevel [56ms]
+[2024-06-05T07:12:34.437Z] > git rev-parse --git-dir --git-common-dir [9ms]
+[2024-06-05T07:12:34.444Z] [info] Open repository: /root/Relish_backend
+[2024-06-05T07:12:34.520Z] > git status -z -uall [66ms]
+[2024-06-05T07:12:34.548Z] > git symbolic-ref --short HEAD [21ms]
+[2024-06-05T07:12:34.582Z] > git for-each-ref --format=%(refname)%00%(upstream:short)%00%(objectname)%00%(upstream:track)%00%(upstream:remotename)%00%(upstream:remoteref) refs/heads/main refs/remotes/main [27ms]
+[2024-06-05T07:12:34.608Z] > git remote --verbose [11ms]
+[2024-06-05T07:12:34.609Z] > git for-each-ref --sort -committerdate --format %(refname) %(objectname) %(*objectname) [20ms]
+[2024-06-05T07:12:34.629Z] > git config --get commit.template [8ms]
+[2024-06-05T07:12:34.700Z] > git status -z -uall [63ms]
+[2024-06-05T07:12:34.736Z] > git symbolic-ref --short HEAD [14ms]
+[2024-06-05T07:12:34.769Z] > git for-each-ref --format=%(refname)%00%(upstream:short)%00%(objectname)%00%(upstream:track)%00%(upstream:remotename)%00%(upstream:remoteref) refs/heads/main refs/remotes/main [27ms]
+[2024-06-05T07:12:34.799Z] > git remote --verbose [14ms]
+[2024-06-05T07:12:34.821Z] > git for-each-ref --sort -committerdate --format %(refname) %(objectname) %(*objectname) [46ms]
+[2024-06-05T07:12:34.840Z] > git config --get commit.template [8ms]
+[2024-06-05T07:12:35.014Z] > git check-ignore -v -z --stdin [13ms]
+[2024-06-05T07:13:15.872Z] > git ls-files --stage -- /root/Relish_backend/requirements.txt [13ms]
+[2024-06-05T07:13:15.879Z] > git show --textconv :requirements.txt [25ms]
+[2024-06-05T07:13:15.894Z] > git cat-file -s f4b6091863947243b339d9f4223388cef9e01b79 [15ms]
+[2024-06-05T07:14:22.869Z] > git ls-files --stage -- /root/Relish_backend/requirements.txt [10ms]
+[2024-06-05T07:14:22.876Z] > git show --textconv :requirements.txt [23ms]
+[2024-06-05T07:14:22.890Z] > git cat-file -s f4b6091863947243b339d9f4223388cef9e01b79 [14ms]

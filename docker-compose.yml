@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  django:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    
+    container_name: relish_django
+
+    ports:
+      - "8000:8000"
+    
+    tty: true
+
+    volumes:
+      - ./src:/root   

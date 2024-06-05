@@ -1,0 +1,5 @@
+[2024-06-05 07:00:45.213] [remoteagent] [info] Extension host agent started.
+[2024-06-05 07:00:45.412] [remoteagent] [debug] ComputeTargetPlatform: linux-x64
+[2024-06-05 07:00:45.438] [remoteagent] [info] [127.0.0.1][557c0722][ManagementConnection] New connection established.
+[2024-06-05 07:00:45.489] [remoteagent] [info] [127.0.0.1][d750ee6b][ExtensionHostConnection] New connection established.
+[2024-06-05 07:00:45.496] [remoteagent] [info] [127.0.0.1][d750ee6b][ExtensionHostConnection] <212> Launched Extension Host Process.

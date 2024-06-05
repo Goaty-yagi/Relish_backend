@@ -1,0 +1,27 @@
+[2024-06-05T07:37:20.780Z] Log level: Info
+[2024-06-05T07:37:20.787Z] [info] Validating found git in: git
+[2024-06-05T07:37:20.817Z] [info] Using git 2.20.1 from git
+[2024-06-05T07:37:20.866Z] > git rev-parse --show-toplevel [36ms]
+[2024-06-05T07:37:20.866Z] fatal: not a git repository (or any parent up to mount point /)
+Stopping at filesystem boundary (GIT_DISCOVERY_ACROSS_FILESYSTEM not set).
+[2024-06-05T07:37:20.880Z] > git rev-parse --show-toplevel [7ms]
+[2024-06-05T07:37:20.880Z] fatal: not a git repository (or any parent up to mount point /)
+Stopping at filesystem boundary (GIT_DISCOVERY_ACROSS_FILESYSTEM not set).
+[2024-06-05T07:37:20.902Z] > git rev-parse --show-toplevel [17ms]
+[2024-06-05T07:37:20.902Z] fatal: not a git repository (or any parent up to mount point /)
+Stopping at filesystem boundary (GIT_DISCOVERY_ACROSS_FILESYSTEM not set).
+[2024-06-05T07:37:20.916Z] > git rev-parse --show-toplevel [7ms]
+[2024-06-05T07:37:20.916Z] fatal: not a git repository (or any parent up to mount point /)
+Stopping at filesystem boundary (GIT_DISCOVERY_ACROSS_FILESYSTEM not set).
+[2024-06-05T07:37:20.927Z] > git rev-parse --show-toplevel [6ms]
+[2024-06-05T07:37:20.927Z] fatal: not a git repository (or any parent up to mount point /)
+Stopping at filesystem boundary (GIT_DISCOVERY_ACROSS_FILESYSTEM not set).
+[2024-06-05T07:37:20.937Z] > git rev-parse --show-toplevel [5ms]
+[2024-06-05T07:37:20.937Z] fatal: not a git repository (or any parent up to mount point /)
+Stopping at filesystem boundary (GIT_DISCOVERY_ACROSS_FILESYSTEM not set).
+[2024-06-05T07:37:20.958Z] > git rev-parse --show-toplevel [15ms]
+[2024-06-05T07:37:20.958Z] fatal: not a git repository (or any parent up to mount point /)
+Stopping at filesystem boundary (GIT_DISCOVERY_ACROSS_FILESYSTEM not set).
+[2024-06-05T07:37:21.927Z] > git rev-parse --show-toplevel [4ms]
+[2024-06-05T07:37:21.927Z] fatal: not a git repository (or any parent up to mount point /)
+Stopping at filesystem boundary (GIT_DISCOVERY_ACROSS_FILESYSTEM not set).

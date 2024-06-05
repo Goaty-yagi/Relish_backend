@@ -1,0 +1,19 @@
+[2024-06-05T07:15:25.428Z] Log level: Info
+[2024-06-05T07:15:25.435Z] [info] Validating found git in: git
+[2024-06-05T07:15:25.459Z] [info] Using git 2.20.1 from git
+[2024-06-05T07:15:25.520Z] > git rev-parse --show-toplevel [49ms]
+[2024-06-05T07:15:25.552Z] > git rev-parse --git-dir --git-common-dir [23ms]
+[2024-06-05T07:15:25.557Z] [info] Open repository: /root/Relish_backend
+[2024-06-05T07:15:25.624Z] > git status -z -uall [59ms]
+[2024-06-05T07:15:25.642Z] > git symbolic-ref --short HEAD [12ms]
+[2024-06-05T07:15:25.676Z] > git for-each-ref --format=%(refname)%00%(upstream:short)%00%(objectname)%00%(upstream:track)%00%(upstream:remotename)%00%(upstream:remoteref) refs/heads/main refs/remotes/main [27ms]
+[2024-06-05T07:15:25.699Z] > git remote --verbose [11ms]
+[2024-06-05T07:15:25.702Z] > git for-each-ref --sort -committerdate --format %(refname) %(objectname) %(*objectname) [19ms]
+[2024-06-05T07:15:25.720Z] > git config --get commit.template [7ms]
+[2024-06-05T07:15:25.787Z] > git status -z -uall [58ms]
+[2024-06-05T07:15:25.807Z] > git symbolic-ref --short HEAD [14ms]
+[2024-06-05T07:15:25.841Z] > git for-each-ref --format=%(refname)%00%(upstream:short)%00%(objectname)%00%(upstream:track)%00%(upstream:remotename)%00%(upstream:remoteref) refs/heads/main refs/remotes/main [26ms]
+[2024-06-05T07:15:25.869Z] > git remote --verbose [13ms]
+[2024-06-05T07:15:25.872Z] > git for-each-ref --sort -committerdate --format %(refname) %(objectname) %(*objectname) [23ms]
+[2024-06-05T07:15:25.888Z] > git config --get commit.template [7ms]
+[2024-06-05T07:15:26.086Z] > git check-ignore -v -z --stdin [12ms]
