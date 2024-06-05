@@ -55,4 +55,4 @@ jobs:
         DATABASE_PASSWORD: postgres
         DATABASE_HOST: localhost
         DATABASE_PORT: 5432
-      run: python src/manage.py test
+      run: python src/manage.py test tests
