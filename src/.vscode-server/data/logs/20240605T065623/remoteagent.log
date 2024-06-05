@@ -1,7 +1,0 @@
-[2024-06-05 06:56:23.417] [remoteagent] [info] Extension host agent started.
-[2024-06-05 06:56:23.620] [remoteagent] [debug] ComputeTargetPlatform: linux-x64
-[2024-06-05 06:56:23.664] [remoteagent] [info] [127.0.0.1][b3d8e6a7][ManagementConnection] New connection established.
-[2024-06-05 06:56:23.713] [remoteagent] [info] [127.0.0.1][f29b55bb][ExtensionHostConnection] New connection established.
-[2024-06-05 06:56:23.719] [remoteagent] [info] [127.0.0.1][f29b55bb][ExtensionHostConnection] <228> Launched Extension Host Process.
-[2024-06-05 06:57:08.797] [remoteagent] [info] [127.0.0.1][b3d8e6a7][ManagementConnection] The client has disconnected gracefully, so the connection will be disposed.
-[2024-06-05 06:57:08.822] [remoteagent] [info] [127.0.0.1][f29b55bb][ExtensionHostConnection] <228> Extension Host Process exited with code: 0, signal: null.

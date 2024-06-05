@@ -1,9 +1,0 @@
-[2024-06-05 06:57:48.388] [exthost] [info] Extension host with pid 212 started
-[2024-06-05 06:57:48.419] [exthost] [info] ExtensionService#_doActivateExtension vscode.debug-auto-launch, startup: true, activationEvent: '*'
-[2024-06-05 06:57:48.437] [exthost] [info] ExtensionService#_doActivateExtension vscode.git-base, startup: true, activationEvent: '*', root cause: vscode.git
-[2024-06-05 06:57:48.452] [exthost] [info] ExtensionService#_doActivateExtension vscode.ipynb, startup: true, activationEvent: '*'
-[2024-06-05 06:57:48.539] [exthost] [info] ExtensionService#_doActivateExtension vscode.git, startup: true, activationEvent: '*'
-[2024-06-05 06:57:48.626] [exthost] [info] ExtensionService#_doActivateExtension vscode.github, startup: true, activationEvent: '*'
-[2024-06-05 06:57:48.737] [exthost] [info] ExtensionService#_doActivateExtension vscode.emmet, startup: false, activationEvent: 'onStartupFinished'
-[2024-06-05 06:57:48.768] [exthost] [info] ExtensionService#_doActivateExtension vscode.merge-conflict, startup: false, activationEvent: 'onStartupFinished'
-[2024-06-05 06:57:48.779] [exthost] [info] Eager extensions activated
