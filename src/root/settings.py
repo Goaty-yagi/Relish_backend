@@ -110,9 +110,9 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'railway',
         'USER': 'postgres',
-        'PASSWORD': getenv('DATABASE_PASSWORD'),
-        'HOST': getenv('DATABASE_HOST'),
-        'PORT': int(getenv('DATABASE_PORT'))
+        'PASSWORD': getenv('DATABASE_PASSWORD', 'postgres'),
+        'HOST': getenv('DATABASE_HOST', 'postgres'),
+        'PORT': int(getenv('DATABASE_PORT', 'postgress'))
     }
 }
 
