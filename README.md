@@ -7,4 +7,3 @@ in the root directory
 
 ### run the container
 `docker-compose up`
-
