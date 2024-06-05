@@ -112,7 +112,7 @@ DATABASES = {
         'USER': 'postgres',
         'PASSWORD': getenv('DATABASE_PASSWORD', 'postgres'),
         'HOST': getenv('DATABASE_HOST', 'postgres'),
-        'PORT': int(getenv('DATABASE_PORT', 'postgress'))
+        'PORT': int(getenv('DATABASE_PORT', '5234'))
     }
 }
 
