@@ -52,6 +52,7 @@ INSTALLED_APPS = [
 
     'users',
     'categories',
+    'restaurants',
 
     'rest_framework',
     'djoser',
@@ -156,20 +157,17 @@ STATIC_URL = 'static/'
 
 AUTHENTICATION_BACKENDS = [
     'social_core.backends.google.GoogleOAuth2',
-    'social_core.backends.spotify.SpotifyOAuth2',
-    'social_core.backends.facebook.FacebookOAuth2',
-    'social_core.backends.amazon.AmazonOAuth2',
     'django.contrib.auth.backends.ModelBackend',
 ]
 
 
 REST_FRAMEWORK = {
-    # 'DEFAULT_AUTHENTICATION_CLASSES': [
-    #     'users.authentication.CustomJWTAuthentication',
-    # ],
-    # 'DEFAULT_PERMISSION_CLASSES' : [
-    #     'rest_framework.permissions.IsAuthenticated',
-    # ],
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'users.authentication.CustomJWTAuthentication',
+    ],
+    'DEFAULT_PERMISSION_CLASSES' : [
+        'rest_framework.permissions.IsAuthenticated',
+    ],
     # 'DEFAULT_THROTTLE_CLASSES': [
     #     'rest_framework.throttling.AnonRateThrottle',
     # ],
