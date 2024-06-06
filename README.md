@@ -62,3 +62,13 @@ at the root directory
 make check_all
 ```
 at the root.
+
+# DB settings
+set environment variables
+```bash
+DATABASE_NAME=''
+DATABASE_USER=''
+DATABASE_PASSWORD=''
+DATABASE_HOST=''
+DATABASE_PORT=''
+```
