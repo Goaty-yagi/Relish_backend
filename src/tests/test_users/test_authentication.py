@@ -1,7 +1,8 @@
 from django.contrib.auth import get_user_model
-from django.test.client import RequestFactory
 from django.test import TestCase
+from django.test.client import RequestFactory
 from rest_framework_simplejwt.tokens import AccessToken
+
 from users.authentication import CustomJWTAuthentication
 
 

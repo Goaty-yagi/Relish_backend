@@ -1,6 +1,7 @@
 from rest_framework import generics
-from .serializers import AwardTypeSerializer
+
 from .models import AwardType
+from .serializers import AwardTypeSerializer
 
 
 class AwardTypeListApi(generics.ListAPIView):

@@ -1,11 +1,11 @@
-from django.urls import reverse
-from django.test import TestCase
-from django.http import JsonResponse
+from unittest.mock import patch
 
+from django.http import JsonResponse
+from django.test import TestCase
+from django.urls import reverse
+from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.test import APIClient
-from rest_framework import status
-from unittest.mock import patch
 
 
 class CustomViewsTests(TestCase):

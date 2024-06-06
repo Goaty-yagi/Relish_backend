@@ -50,6 +50,9 @@ jobs:
 
     - name: Run flake8
       run: flake8
+    
+    - name: Check isort
+      run: isort --check-only .
 
     - name: Run tests
       env:

@@ -1,5 +1,6 @@
 from django.urls import path
-from .views import AwardTypeListApi, AwardTypeCreateApi
+
+from .views import AwardTypeCreateApi, AwardTypeListApi
 
 urlpatterns = [
     path('award-type-list/', AwardTypeListApi.as_view()),

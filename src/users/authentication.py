@@ -1,9 +1,10 @@
 from typing import Optional, Tuple
+
 from django.conf import settings
+from django.contrib.auth.models import User
 from rest_framework.request import Request
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from rest_framework_simplejwt.tokens import UntypedToken
-from django.contrib.auth.models import User
 
 
 class CustomJWTAuthentication(JWTAuthentication):
