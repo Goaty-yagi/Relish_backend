@@ -57,6 +57,9 @@ jobs:
     - name: Run MyPy
       run: python -m mypy src
 
+    - name: Run Xenon
+      run: xenon --max-absolute A --max-modules A --max-average A src
+
     - name: Run tests
       env:
         DATABASE_NAME: test_db
