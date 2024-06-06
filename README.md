@@ -56,3 +56,9 @@ With these settings, Xenon is configured to be quite strict, potentially filteri
 python src/manage.py test tests
 ```
 at the root directory
+
+## Run all checks in one go
+```
+make check_all
+```
+at the root.
