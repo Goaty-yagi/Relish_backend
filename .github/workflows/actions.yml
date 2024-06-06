@@ -54,6 +54,9 @@ jobs:
     - name: Check isort
       run: isort --check-only .
 
+    - name: Run MyPy
+      run: python -m mypy src
+
     - name: Run tests
       env:
         DATABASE_NAME: test_db

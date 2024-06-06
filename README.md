@@ -16,10 +16,16 @@ flake8 .
 ```
 at the root directory
 
-### Isort
+## Isort
 
 ### sorting and organizing import statements
 ```bash
 isort .
+```
+at the root directory
+
+## mypy
+```bash
+mypt src
 ```
 at the root directory

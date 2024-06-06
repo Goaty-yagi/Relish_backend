@@ -25,12 +25,18 @@ class CustomJWTAuthenticationTestCase(TestCase):
         request.META['HTTP_AUTHORIZATION'] = f'Bearer {str(token)}'
 
         # Authenticate the request
-        authenticated_user, authenticated_token = self.authentication.authenticate(request)
+        auth_result = self.authentication.authenticate(request)
 
-        # Verify that authentication is successful
-        self.assertIsNotNone(authenticated_user)
-        self.assertEqual(authenticated_user.UID, str(user.UID))
-        self.assertEqual(str(authenticated_token), str(token))
+        # Check if authentication was successful
+        if auth_result is not None:
+            authenticated_user, authenticated_token = auth_result
+            # Verify that authentication is successful
+            self.assertIsNotNone(authenticated_user)
+            self.assertEqual(authenticated_user.UID, str(user.UID))
+            self.assertEqual(str(authenticated_token), str(token))
+        else:
+            # Handle authentication failure
+            self.fail("Authentication failed")
 
     def test_authenticate_with_wrong_cookies(self):
         # Create a user for testing
