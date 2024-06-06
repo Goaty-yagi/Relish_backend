@@ -48,6 +48,9 @@ jobs:
         DATABASE_PORT: 5432
       run: python src/manage.py migrate
 
+    - name: Run flake8
+      run: flake8
+
     - name: Run tests
       env:
         DATABASE_NAME: test_db

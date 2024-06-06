@@ -3,3 +3,4 @@ media/
 __pycache__/
 env.local
 db.sqlite3
+.mypy_cache/
