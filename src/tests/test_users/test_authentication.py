@@ -4,6 +4,7 @@ from django.test import TestCase
 from rest_framework_simplejwt.tokens import AccessToken
 from users.authentication import CustomJWTAuthentication
 
+
 class CustomJWTAuthenticationTestCase(TestCase):
     def setUp(self):
         self.authentication = CustomJWTAuthentication()
@@ -12,7 +13,8 @@ class CustomJWTAuthenticationTestCase(TestCase):
     def test_authenticate_success(self):
         # Create a user for testing
         CustomUser = get_user_model()
-        user = CustomUser.objects.create_user(username='testuser', email='test@example.com', password='password')
+        user = CustomUser.objects.create_user(
+            username='testuser', email='test@example.com', password='password')
 
         # Create a valid access token for the user
         token = AccessToken.for_user(user)
@@ -32,7 +34,8 @@ class CustomJWTAuthenticationTestCase(TestCase):
     def test_authenticate_with_wrong_cookies(self):
         # Create a user for testing
         CustomUser = get_user_model()
-        user = CustomUser.objects.create_user(username='testuser', email='test@example.com', password='password')
+        user = CustomUser.objects.create_user(
+            username='testuser', email='test@example.com', password='password')
 
         # Create a valid access token for the user
         token = AccessToken.for_user(user)
@@ -57,4 +60,3 @@ class CustomJWTAuthenticationTestCase(TestCase):
 
         # Assert that authentication fails and returns None for both user and token
         self.assertIsNone(return_value)
-

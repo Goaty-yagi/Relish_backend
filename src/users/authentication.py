@@ -5,6 +5,7 @@ from rest_framework_simplejwt.authentication import JWTAuthentication
 from rest_framework_simplejwt.tokens import UntypedToken
 from django.contrib.auth.models import User
 
+
 class CustomJWTAuthentication(JWTAuthentication):
     def authenticate(self, request: Request) -> Optional[Tuple[User, UntypedToken]]:
         try:
@@ -20,5 +21,5 @@ class CustomJWTAuthentication(JWTAuthentication):
             validated_token = self.get_validated_token(raw_token)
 
             return self.get_user(validated_token), validated_token
-        except:
+        except BaseException:
             return None

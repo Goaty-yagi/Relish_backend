@@ -13,7 +13,6 @@ from os import getenv, path
 from pathlib import Path
 import dotenv
 import platform
-from django.core.management.utils import get_random_secret_key
 from datetime import timedelta
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent

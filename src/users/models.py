@@ -1,10 +1,8 @@
 from typing import Optional
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
-from django.conf import settings
 
 from uuid import uuid4
-import datetime
 
 
 class UserManager(BaseUserManager):

@@ -94,6 +94,7 @@ class CustomTokenRefreshView(TokenRefreshView):
 
         return response
 
+
 class CustomTokenVerifyView(TokenVerifyView):
     def post(self, request: HttpRequest, *args: tuple, **kwargs: dict) -> HttpResponse:
         access_token = request.COOKIES.get('access')
