@@ -20,6 +20,7 @@ djoser==2.2.0
 flake8==7.0.0
 gunicorn==21.2.0
 idna==3.4
+isort==5.13.2
 jmespath==1.0.1
 mccabe==0.7.0
 mypy==1.10.0
