@@ -64,7 +64,7 @@ class Award(models.Model):
         on_delete=models.DO_NOTHING
     )
     required_count = models.IntegerField(default=0)
-    user_id = models.ForeignKey(
+    user = models.ForeignKey(
         User,
         related_name='awards',
         on_delete=models.CASCADE
@@ -82,27 +82,46 @@ class Award(models.Model):
 
 @receiver(post_save, sender=Restaurant)
 def handle_restaurant_creation(sender, instance, created, **kwargs):
-    print("CREATED:", instance.__dict__, sender)
     if created:
         user = instance.user_id
         cuisine_type = instance.cuisine_type
         restaurant_sum = Restaurant.objects.filter(user_id=user).count()
-        print("restaurant_list", restaurant_sum)
 
-        # min_required_count = BaseAward.objects.filter(
-        #     award_type__name='sum',
-        #     required_count__gt=restaurant_sum
-        # ).aggregate(min_required_count=Min('required_count'))['min_required_count']
+        # Handle sum type award
         min_required_obj = BaseAward.objects.filter(
             award_type__name='sum',
             required_count__gte=restaurant_sum
         ).order_by('required_count').first()
-        # Might need to migrate 
-        # if min_required_count == restaurant_sum:
-        #     if Award.objects.filter(base_award=)
-        print("min_required_count", min_required_obj.__dict__)
-        # Logic to handle creation
-        print("Restaurant created:", instance)
+        if min_required_obj:
+            if min_required_obj.required_count == restaurant_sum:
+                if not Award.objects.filter(base_award=min_required_obj).exists():
+                    obj = {
+                        'name': min_required_obj.name,
+                        'description': min_required_obj.description,
+                        'award_type': min_required_obj.award_type,
+                        'required_count': min_required_obj.required_count,
+                    }
+                    Award.objects.create(user=user, base_award=min_required_obj, **obj)
+
+        # Handle cuisine type awards
+        cuisine_type_restaurant_sum = Restaurant.objects.filter(
+            user_id=user, cuisine_type=cuisine_type).count()
+        min_required_obj = BaseAward.objects.filter(
+            award_type__name='cuisine',
+            cuisine_type=cuisine_type,
+            required_count__gte=cuisine_type_restaurant_sum
+        ).order_by('required_count').first()
+        if min_required_obj:
+            if min_required_obj.required_count == cuisine_type_restaurant_sum:
+                if not Award.objects.filter(base_award=min_required_obj).exists():
+                    obj = {
+                        'name': min_required_obj.name,
+                        'description': min_required_obj.description,
+                        'award_type': min_required_obj.award_type,
+                        'cuisine_type': min_required_obj.cuisine_type,
+                        'required_count': min_required_obj.required_count,
+                    }
+                    Award.objects.create(user=user, base_award=min_required_obj, **obj)
 
 
 @receiver(pre_delete, sender=Restaurant)
@@ -111,16 +130,3 @@ def handle_restaurant_deletion(sender, instance, **kwargs):
     user = instance.user_id
     restaurant_sum = Restaurant.objects.filter(user_id=user).count()
     print("Restaurant deleted:", instance.user_id)
-
-# @receiver(post_save, sender=Restaurant)
-# def award_handling_by_restaurant_changes(sender, instance, created, **kwargs):
-#     if created:
-#         print("RECeiVER")
-#         ids = ["ボキャブラリー","ひらがな","カタカナ","すうじ"]
-#         MyQuiz.objects.create(user=instance)
-#         grade = ParentQuiz.objects.get(name="超初級")
-#         quiz_taker = QuizTaker.objects.create(user=instance, grade=grade)
-#         status = ParentStatus.objects.filter(name__in=ids)
-#         for i in status:
-#             UserStatus.objects.create(quiz_taker=quiz_taker, status=i, grade=grade)
-#         return quiz_taker
