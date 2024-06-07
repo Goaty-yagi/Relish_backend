@@ -1,3 +1,6 @@
 from django.contrib import admin
 
-# Register your models here.
+from .models import AwardType, CuisineType
+
+admin.site.register(AwardType)
+admin.site.register(CuisineType)
