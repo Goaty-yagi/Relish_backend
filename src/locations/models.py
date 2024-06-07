@@ -2,8 +2,8 @@ from django.db import models
 
 
 class Location(models.Model):
-    latitude = models.IntegerField()
-    longitude = models.IntegerField()
+    latitude = models.FloatField()
+    longitude = models.FloatField()
 
     def __str__(self) -> str:
-        return self.id
+        return str(self.id)

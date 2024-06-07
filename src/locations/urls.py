@@ -1,6 +1,7 @@
 from django.urls import path
-from .views import LocationCreateOrUpdateApi
+
+from .views import LocationListApi
 
 urlpatterns = [
-    path('location-create-update/', LocationCreateOrUpdateApi.as_view()),
+    path('location-list/', LocationListApi.as_view()),
 ]

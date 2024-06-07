@@ -24,5 +24,6 @@ urlpatterns = [
     path('api/', include('categories.urls')),
     path('api/', include('restaurants.urls')),
     path('api/', include('locations.urls')),
+    path('api/', include('user_configs.urls')),
     path(r'^auth/', include('djoser.social.urls')),
 ]

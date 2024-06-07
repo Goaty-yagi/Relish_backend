@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'categories',
     'restaurants',
     'locations',
+    'user_configs',
 
     'rest_framework',
     'djoser',
