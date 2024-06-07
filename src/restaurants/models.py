@@ -10,7 +10,7 @@ class Restaurant(models.Model):
     obj = models.CharField(max_length=30000)
     cuisine_type = models.ForeignKey(
         CuisineType,
-        related_name='cuisine_type',
+        related_name='restaurant',
         null=True,
         blank=True,
         default=None,
@@ -20,7 +20,7 @@ class Restaurant(models.Model):
     is_favorite = models.BooleanField(default=False)
     user_id = models.ForeignKey(
         User,
-        related_name='user_id',
+        related_name='restaurant',
         on_delete=models.CASCADE
     )
     created_on = models.DateTimeField(default=timezone.now, blank=True)
