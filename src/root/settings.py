@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     'restaurants',
     'locations',
     'user_configs',
+    'awards',
 
     'rest_framework',
     'djoser',
@@ -72,7 +73,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'defender.middleware.FailedLoginMiddleware',
+    # 'defender.middleware.FailedLoginMiddleware',
 ]
 
 # corsheaders setting start
