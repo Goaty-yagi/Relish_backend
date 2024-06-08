@@ -1,15 +1,14 @@
-from django.db import models
-from django.utils import timezone
-
-from categories.models import CuisineType
-from users.models import User
-from categories.models import AwardType, CuisineType
-from restaurants.models import Restaurant
+from typing import Any
 
 from django.core.exceptions import ValidationError
+from django.db import models
 from django.db.models.signals import post_save, pre_delete
 from django.dispatch import receiver
-from django.db.models import Min
+from django.utils import timezone
+
+from categories.models import AwardType, CuisineType
+from restaurants.models import Restaurant
+from users.models import User
 
 
 class BaseAward(models.Model):
@@ -40,12 +39,15 @@ class BaseAward(models.Model):
     def __str__(self) -> str:
         return self.name
 
-    def save(self, *args, **kwargs):
+    def save(self, *args: Any, **kwargs: Any) -> None:
         if self.award_type.name == 'cuisine':
-            self.description = f"Visited {self.required_count} new {self.cuisine_type.name} {'restaurant' if self.required_count == 1 else 'restaurants'}"
+            f"Visited {self.required_count} new {self.cuisine_type.name} " \
+                f"{'restaurant' if self.required_count == 1 else 'restaurants'}"
+            self.name = f"{self.cuisine_type.name} : {self.required_count}"
         elif self.award_type.name == 'sum':
-            self.description = f"Visited {self.required_count} new {'restaurant' if self.required_count == 1 else 'restaurants'}"
-        self.name = f"{self.award_type.name} : {self.required_count}"
+            self.description = f"Visited {self.required_count} new "\
+                   f"{'restaurant' if self.required_count == 1 else 'restaurants'}"
+            self.name = f"{self.award_type.name} : {self.required_count}"
 
         if not self.description:
             raise ValidationError("Description cannot be generated as award_type is missing.")
@@ -93,11 +95,12 @@ class Award(models.Model):
 
 
 @receiver(post_save, sender=Restaurant)
-def handle_restaurant_creation(sender, instance, created, **kwargs):
+def handle_restaurant_creation(
+        sender: Restaurant, instance: Restaurant, created: bool, **kwargs: Any) -> None:
     if created:
-        user = instance.user_id
+        user: str = instance.user_id
         cuisine_type = instance.cuisine_type
-        restaurant_sum = Restaurant.objects.filter(user_id=user).count()
+        restaurant_sum: int = Restaurant.objects.filter(user_id=user).count()
 
         # Handle sum type award
         min_required_obj = BaseAward.objects.filter(
@@ -124,7 +127,6 @@ def handle_restaurant_creation(sender, instance, created, **kwargs):
             cuisine_type=cuisine_type,
             required_count__gte=cuisine_type_restaurant_sum
         ).order_by('required_count').first()
-        print('cuisine_type_restaurant_sum', cuisine_type_restaurant_sum, min_required_obj, cuisine_type)
         if min_required_obj:
             if min_required_obj.required_count == cuisine_type_restaurant_sum:
                 if not Award.objects.filter(base_award=min_required_obj).exists():
@@ -140,12 +142,13 @@ def handle_restaurant_creation(sender, instance, created, **kwargs):
 
 
 @receiver(pre_delete, sender=Restaurant)
-def handle_restaurant_deletion(sender, instance, **kwargs):
-    user = instance.user_id
+def handle_restaurant_deletion(
+        sender: Restaurant, instance: Restaurant, **kwargs: Any) -> None:
+    user: str = instance.user_id
     cuisine_type = instance.cuisine_type
-    restaurant_sum = Restaurant.objects.filter(user_id=user).count() -1
+    restaurant_sum: int = Restaurant.objects.filter(user_id=user).count() - 1
 
-      # Handle sum type award
+    # Handle sum type award
     max_required_award = Award.objects.filter(
         award_type__name='sum',
         required_count__gt=restaurant_sum
@@ -157,13 +160,12 @@ def handle_restaurant_deletion(sender, instance, **kwargs):
 
     # Handle cuisine type awards
     cuisine_type_restaurant_sum = Restaurant.objects.filter(
-        user_id=user, cuisine_type=cuisine_type).count() -1
+        user_id=user, cuisine_type=cuisine_type).count() - 1
     max_required_award = Award.objects.filter(
         award_type__name='cuisine',
         cuisine_type=cuisine_type,
         required_count__gt=cuisine_type_restaurant_sum
     ).order_by('required_count').first()
-    print('max_required_award',max_required_award, cuisine_type_restaurant_sum)
     if max_required_award:
         if max_required_award.required_count > cuisine_type_restaurant_sum:
             max_required_award.delete()

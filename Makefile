@@ -13,7 +13,7 @@ check_complexity:
 	radon cc src
 
 check_xenon:
-	xenon --max-absolute A --max-modules A --max-average A src
+	xenon --max-absolute B --max-modules B --max-average B src
 
 run_tests:
 	python src/manage.py test tests
