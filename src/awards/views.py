@@ -15,3 +15,4 @@ class AwardListApi(APIView):
         base_award_list = BaseAward.objects.all()
         serializer = BaseAwardSerializer(base_award_list, many=True)
         return Response(serializer.data)
+
