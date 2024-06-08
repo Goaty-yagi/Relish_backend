@@ -219,16 +219,15 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'users.User'
 
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_POUT = '587'
-EMAIL_USE_TLS = True
-# EMAIL_USE_SSL = False
-EMAIL_HOST_USER = getenv('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = getenv('EMAIL_HOST_PASSWORD')
-VERIFICATION_URL = getenv('VERIFICATION_URL')
-PASSWORD_CHANGE_URL = getenv('PASSWORD_CHANGE_URL')
+EMAIL_BACKEND = 'django_ses.SESBackend'
+DEFAULT_FROM_EMAIL = getenv('AWS_SES_FROM_EMAIL')
 
-DEFAULT_FROM_EMAIL = getenv('EMAIL_HOST_USER')
+AWS_SES_ACCESS_KEY_ID = getenv('AWS_SES_ACCESS_KEY_ID')
+AWS_SES_SECRET_ACCESS_KEY = getenv('AWS_SES_SECRET_ACCESS_KEY')
+AWS_SES_REGION_NAME = getenv('AWS_SES_REGION_NAME')
+AWS_SES_REGION_ENDPOINT = f'email.{AWS_SES_REGION_NAME}.amazonaws.com'
+AWS_SES_FROM_EMAIL = getenv('AWS_SES_FROM_EMAIL')
+USE_SES_V2 = True
+
 DOMAIN = getenv('DOMAIN')  # for djoser email template
-SITE_NAME = 'Full_Auth'  # for djoser email template
+SITE_NAME = 'Relish'  # for djoser email template
