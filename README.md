@@ -1,11 +1,11 @@
 # Relish_backend
 
-## Docker settings
-### Build docker compose
+# Docker settings
+## Build docker compose
 `docker-compose build`
 in the root directory
 
-### run the container
+## run the container
 `docker-compose up`
 
 # Code Quality Checks
@@ -63,12 +63,72 @@ make check_all
 ```
 at the root.
 
-# DB settings
-set environment variables
+# How to run the server?
+
+## 1, install virtualenv
+`pip install virtualenv`
+
+## 2, Make a virtual environment
+`python -m venv myenv`
+
+## 3, Activate Virtual Environment
+`source myenv/bin/activate`
+
+## 4, Install dependencies
+`pip install -r requirements.txt`
+
+## 5, Creste a file named env.local in the src dir, and set environment variables
+
+### Environment variables
+
 ```bash
+# For social authentications 
+GOOGLE_AUTH_KEY=''
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET=''
+REDIRECT_URLS='http://localhost:3000/auth/google'
+DOMAIN='localhost:3000'
+
+# For database settings
 DATABASE_NAME=''
 DATABASE_USER=''
 DATABASE_PASSWORD=''
 DATABASE_HOST=''
 DATABASE_PORT=''
+
+# For email verification 
+AWS_SES_ACCESS_KEY_ID=''
+AWS_SES_SECRET_ACCESS_KEY=''
+AWS_SES_REGION_NAME=''
+AWS_SES_FROM_EMAIL=''
 ```
+
+## 6, Go to src dir and run server
+`cd src`
+`python manage.py runserver`
+
+# Endpoints
+## Award endpoint
+### get awards list
+`post: domain/api/award-list/ `
+
+## Restaurant endpoint
+### Get user restaurant list
+`post: domain/api/restaurant-create/`
+with data
+```python
+{
+  "place_id": "test7",
+  "obj": "zzzzzzzzzzzzzzzzzzzzz.",
+  "cuisine_type":"japanese",
+  "has_been": true
+}
+if the backend receive a place_id which exists already, the restaurant data in DB will be deleted.
+
+```
+### get restaurant list
+`restaurant-list/`
+
+
+
+
+
