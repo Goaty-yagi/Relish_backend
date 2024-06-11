@@ -1,4 +1,4 @@
-# AWS-ec2-to deploy
+# Relish backend
 
 # Docker settings
 ## Build docker compose
