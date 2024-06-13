@@ -12,7 +12,7 @@ from users.models import User
 
 
 class BaseAward(models.Model):
-    name = models.CharField(max_length=100, unique=True, blank=True)
+    name = models.CharField(max_length=100, unique=True, blank=False)
     description = models.CharField(max_length=120, blank=True)
     award_type = models.ForeignKey(
         AwardType,
@@ -28,7 +28,7 @@ class BaseAward(models.Model):
         default=None,
         on_delete=models.CASCADE
     )
-    required_count = models.IntegerField(default=0)
+    required_count = models.PositiveIntegerField(default=1)
     start_date = models.DateTimeField(default=None, blank=True, null=True)
     end_date = models.DateTimeField(default=None, blank=True, null=True)
     created_on = models.DateTimeField(default=timezone.now, blank=True)
@@ -37,17 +37,17 @@ class BaseAward(models.Model):
         ordering = ['-created_on',]
 
     def __str__(self) -> str:
-        return self.name
+        return f"A: {self.award_type.name} C: {self.cuisine_type} : {self.required_count}"
 
     def save(self, *args: Any, **kwargs: Any) -> None:
         if self.award_type.name == 'cuisine':
-            f"Visited {self.required_count} new {self.cuisine_type.name} " \
+            self.description = f"Visited {self.required_count} new {self.cuisine_type.name} " \
                 f"{'restaurant' if self.required_count == 1 else 'restaurants'}"
-            self.name = f"{self.cuisine_type.name} : {self.required_count}"
         elif self.award_type.name == 'sum':
+            if self.cuisine_type:
+                raise ValidationError("If Award type is sum, cuisine type should be Null.")
             self.description = f"Visited {self.required_count} new "\
-                   f"{'restaurant' if self.required_count == 1 else 'restaurants'}"
-            self.name = f"{self.award_type.name} : {self.required_count}"
+                f"{'restaurant' if self.required_count == 1 else 'restaurants'}"
 
         if not self.description:
             raise ValidationError("Description cannot be generated as award_type is missing.")
@@ -77,7 +77,7 @@ class Award(models.Model):
         null=False,
         on_delete=models.PROTECT
     )
-    required_count = models.IntegerField(default=0)
+    required_count = models.PositiveIntegerField(default=1)
     user = models.ForeignKey(
         User,
         related_name='awards',
@@ -152,7 +152,7 @@ def handle_restaurant_deletion(
     max_required_award = Award.objects.filter(
         award_type__name='sum',
         required_count__gt=restaurant_sum
-        ).order_by('required_count').first()
+    ).order_by('required_count').first()
     if max_required_award:
         if max_required_award.required_count > restaurant_sum:
             max_required_award.delete()
