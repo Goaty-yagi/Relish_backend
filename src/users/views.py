@@ -9,6 +9,10 @@ from rest_framework.views import APIView
 from rest_framework_simplejwt.views import (TokenObtainPairView, TokenRefreshView,
                                             TokenVerifyView)
 
+from rest_framework.request import Request
+from .models import User
+from .serializers import UserSerializer, UserTestSerializer
+from rest_framework import generics
 
 class CustomProviderAuthView(ProviderAuthView):
     def post(self, request: HttpRequest, *args: Any, **kwargs: Any) -> HttpResponse:
@@ -111,3 +115,16 @@ class LogoutView(APIView):
         response.delete_cookie('refresh')
 
         return response
+
+
+class UserRetrieveApi(generics.RetrieveUpdateDestroyAPIView):
+    serializer_class = UserSerializer
+    queryset = User.objects.all()
+    lookup_field = 'UID'
+
+
+# class UserRestaurantListApiListApi(APIView):
+#     def get(self, request: Request) -> Response:
+#         restaurant_list = User.objects.all()
+#         serializer = UserTestSerializer(restaurant_list, many=True)
+#         return Response(serializer.data)

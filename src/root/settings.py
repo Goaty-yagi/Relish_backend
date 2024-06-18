@@ -203,8 +203,8 @@ SIMPLE_JWT = {
     'ROTATE_REFRESH_TOKENS': True,
     'BLACKLIST_AFTER_ROTATION': True,
     'UPDATE_LAST_LOGIN': True,
-    'USER_ID_FIELD': 'username',
-    'USER_ID_CLAIM': 'username'
+    'USER_ID_FIELD': 'UID',
+    'USER_ID_CLAIM': 'UID'
 }
 
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = getenv('GOOGLE_AUTH_KEY')
