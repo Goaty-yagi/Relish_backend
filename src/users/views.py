@@ -3,11 +3,14 @@ from typing import Any
 from django.conf import settings
 from django.http import HttpRequest, HttpResponse
 from djoser.social.views import ProviderAuthView
-from rest_framework import status
+from rest_framework import generics, status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework_simplejwt.views import (TokenObtainPairView, TokenRefreshView,
                                             TokenVerifyView)
+
+from .models import User
+from .serializers import UserSerializer
 
 
 class CustomProviderAuthView(ProviderAuthView):
@@ -111,3 +114,9 @@ class LogoutView(APIView):
         response.delete_cookie('refresh')
 
         return response
+
+
+class UserRetrieveApi(generics.RetrieveUpdateDestroyAPIView):
+    serializer_class = UserSerializer
+    queryset = User.objects.all()
+    lookup_field = 'UID'
