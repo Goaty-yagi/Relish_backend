@@ -8,15 +8,8 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = [
-			"UID",
-			"username",
+            "UID",
+            "username",
             "avatar",
-			"is_active",
-		]
-
-class UserTestSerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = User
-        fields = "__all__"
-
+            "is_active",
+        ]

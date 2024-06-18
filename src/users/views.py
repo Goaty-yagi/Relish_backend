@@ -3,16 +3,15 @@ from typing import Any
 from django.conf import settings
 from django.http import HttpRequest, HttpResponse
 from djoser.social.views import ProviderAuthView
-from rest_framework import status
+from rest_framework import generics, status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework_simplejwt.views import (TokenObtainPairView, TokenRefreshView,
                                             TokenVerifyView)
 
-from rest_framework.request import Request
 from .models import User
-from .serializers import UserSerializer, UserTestSerializer
-from rest_framework import generics
+from .serializers import UserSerializer
+
 
 class CustomProviderAuthView(ProviderAuthView):
     def post(self, request: HttpRequest, *args: Any, **kwargs: Any) -> HttpResponse:
@@ -121,10 +120,3 @@ class UserRetrieveApi(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = UserSerializer
     queryset = User.objects.all()
     lookup_field = 'UID'
-
-
-# class UserRestaurantListApiListApi(APIView):
-#     def get(self, request: Request) -> Response:
-#         restaurant_list = User.objects.all()
-#         serializer = UserTestSerializer(restaurant_list, many=True)
-#         return Response(serializer.data)
