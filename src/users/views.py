@@ -5,6 +5,7 @@ from django.http import HttpRequest, HttpResponse
 from djoser.social.views import ProviderAuthView
 from rest_framework import generics, status
 from rest_framework.response import Response
+from rest_framework.request import Request
 from rest_framework.views import APIView
 from rest_framework_simplejwt.views import (TokenObtainPairView, TokenRefreshView,
                                             TokenVerifyView)
@@ -116,7 +117,11 @@ class LogoutView(APIView):
         return response
 
 
-class UserRetrieveApi(generics.RetrieveUpdateDestroyAPIView):
-    serializer_class = UserSerializer
-    queryset = User.objects.all()
-    lookup_field = 'UID'
+class isAthenticatedApi(APIView):
+    # for not SSR front end app
+    def post(self, request: Request) -> Response:
+        try:
+            request.user
+            return Response(True)
+        except BaseException:
+            return Response(False, 400)
