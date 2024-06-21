@@ -13,7 +13,8 @@ from .serializers import RestaurantCreateSerializer
 class RestaurantCreateApi(APIView):
     def post(self, request: Request) -> Response:
         place_id: Optional[str] = request.data.get('place_id')
-        existing_restaurant = Restaurant.objects.filter(place_id=place_id)
+        user = request.user
+        existing_restaurant = Restaurant.objects.filter(place_id=place_id, user_id=user)
         if existing_restaurant.exists():
             existing_restaurant.delete()
             return Response({'message': 'Successfully deleted!'}, 204)

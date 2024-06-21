@@ -6,7 +6,7 @@ from users.models import User
 
 
 class Restaurant(models.Model):
-    place_id = models.CharField(max_length=100, unique=True, blank=False)
+    place_id = models.CharField(max_length=100, blank=False)
     obj = models.CharField(max_length=30000)
     cuisine_type = models.ForeignKey(
         CuisineType,
