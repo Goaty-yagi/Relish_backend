@@ -1,7 +1,8 @@
 from django.urls import path, re_path
 
 from .views import (CustomProviderAuthView, CustomTokenObtainPairView,
-                    CustomTokenRefreshView, CustomTokenVerifyView, LogoutView,isAthenticatedApi)
+                    CustomTokenRefreshView, CustomTokenVerifyView, LogoutView,
+                    isAthenticatedApi)
 
 urlpatterns = [
     re_path(
