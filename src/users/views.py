@@ -7,6 +7,7 @@ from rest_framework import status
 from rest_framework.request import Request
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from .serializers import UserSerializer
 from rest_framework_simplejwt.views import (TokenObtainPairView, TokenRefreshView,
                                             TokenVerifyView)
 
@@ -118,7 +119,7 @@ class isAthenticatedApi(APIView):
     # for not SSR front end app
     def post(self, request: Request) -> Response:
         try:
-            request.user
-            return Response(True)
+            serializer = UserSerializer(request.user)
+            return Response(serializer.data)
         except BaseException:
             return Response(False, 400)
