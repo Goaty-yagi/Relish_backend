@@ -197,8 +197,7 @@ AUTH_COOKIE_SECURE = getenv('AUTH_COOKIE_SECURE', 'True') == 'True'
 AUTH_COOKIE_HTTP_ONLY = getenv('AUTH_COOKIE_HTTP_ONLY', 'True') == 'True'
 AUTH_COOKIE_PATH = '/'
 AUTH_COOKIE_SAMESITE = 'None'
-print("AUTH_COOKIE_HTTP_ONLY:", AUTH_COOKIE_HTTP_ONLY)
-print("AUTH_COOKIE_SECURE:", AUTH_COOKIE_SECURE)
+
 SIMPLE_JWT = {
     'SIGNING_KEY': SECRET_KEY,
     'ACCESS_TOKEN_LIFETIME': timedelta(seconds=300),
@@ -217,7 +216,19 @@ SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE = [
     'https://www.googleapis.com/auth/userinfo.profile',
     'openid'
 ]
-SOCIAL_AUTH_GOOGLE_OAUTH2_EXTRA_DATA = ['username']
+SOCIAL_AUTH_GOOGLE_OAUTH2_EXTRA_DATA = ['username', 'avatar']
+SOCIAL_AUTH_PIPELINE = (
+    'social_core.pipeline.social_auth.social_details',
+    'social_core.pipeline.social_auth.social_uid',
+    'social_core.pipeline.social_auth.auth_allowed',
+    'social_core.pipeline.social_auth.social_user',
+    'social_core.pipeline.user.get_username',
+    'social_core.pipeline.social_auth.associate_by_email',
+    'social_core.pipeline.user.create_user',
+    'social_core.pipeline.social_auth.associate_user',
+    'social_core.pipeline.social_auth.load_extra_data',
+    'root.pipeline.save_user_details'
+)
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'users.User'

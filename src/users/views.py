@@ -1,42 +1,55 @@
 from typing import Any
 
 from django.conf import settings
+from django.contrib.auth import get_user_model
 from django.http import HttpRequest, HttpResponse
 from djoser.social.views import ProviderAuthView
 from rest_framework import status
 from rest_framework.request import Request
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from .serializers import UserSerializer
 from rest_framework_simplejwt.views import (TokenObtainPairView, TokenRefreshView,
                                             TokenVerifyView)
+
+from .serializers import UserSerializer
+
+User = get_user_model()
 
 
 class CustomProviderAuthView(ProviderAuthView):
     def post(self, request: HttpRequest, *args: Any, **kwargs: Any) -> HttpResponse:
         response = super().post(request, *args, **kwargs)
+
         if response.status_code == 201:
             access_token = response.data.get('access')
             refresh_token = response.data.get('refresh')
 
-            response.set_cookie(
-                'access',
-                access_token,
-                max_age=settings.AUTH_COOKIE_MAX_AGE,
-                path=settings.AUTH_COOKIE_PATH,
-                secure=settings.AUTH_COOKIE_SECURE,
-                httponly=settings.AUTH_COOKIE_HTTP_ONLY,
-                samesite=settings.AUTH_COOKIE_SAMESITE
-            )
-            response.set_cookie(
-                'refresh',
-                refresh_token,
-                max_age=settings.AUTH_COOKIE_MAX_AGE,
-                path=settings.AUTH_COOKIE_PATH,
-                secure=settings.AUTH_COOKIE_SECURE,
-                httponly=settings.AUTH_COOKIE_HTTP_ONLY,
-                samesite=settings.AUTH_COOKIE_SAMESITE
-            )
+            user_data = response.data.get('user')
+            user = User.objects.get(username=user_data)
+            if user_data:
+                user_serializer = UserSerializer(user)
+                user_data = user_serializer.data
+
+                response.data['user'] = user_data
+
+                response.set_cookie(
+                    'access',
+                    access_token,
+                    max_age=settings.AUTH_COOKIE_MAX_AGE,
+                    path=settings.AUTH_COOKIE_PATH,
+                    secure=settings.AUTH_COOKIE_SECURE,
+                    httponly=settings.AUTH_COOKIE_HTTP_ONLY,
+                    samesite=settings.AUTH_COOKIE_SAMESITE
+                )
+                response.set_cookie(
+                    'refresh',
+                    refresh_token,
+                    max_age=settings.AUTH_COOKIE_MAX_AGE,
+                    path=settings.AUTH_COOKIE_PATH,
+                    secure=settings.AUTH_COOKIE_SECURE,
+                    httponly=settings.AUTH_COOKIE_HTTP_ONLY,
+                    samesite=settings.AUTH_COOKIE_SAMESITE
+                )
 
         return response
 

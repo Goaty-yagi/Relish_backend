@@ -14,15 +14,9 @@ class BaseAwardSerializer(serializers.ModelSerializer):
         ]
 
 
-# class BaseAwardSerializer(serializers.ModelSerializer):
-
-#     class Meta:
-#         model = BaseAward
-#         fields = "__all__"
-
-
 class AwardSerializer(serializers.ModelSerializer):
     cuisine_type = serializers.CharField(source='cuisine_type.name', read_only=True)
+
     class Meta:
         model = Award
         fields = [
