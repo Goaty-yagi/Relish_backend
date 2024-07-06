@@ -1,5 +1,6 @@
 from typing import Any
 
+import jwt
 from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.http import HttpRequest, HttpResponse
@@ -11,7 +12,7 @@ from rest_framework.views import APIView
 from rest_framework_simplejwt.views import (TokenObtainPairView, TokenRefreshView,
                                             TokenVerifyView)
 
-from .serializers import UserSerializer
+from .serializers import CustomUserSerializer, UserSerializer
 
 User = get_user_model()
 
@@ -80,6 +81,16 @@ class CustomTokenObtainPairView(TokenObtainPairView):
                 httponly=settings.AUTH_COOKIE_HTTP_ONLY,
                 samesite=settings.AUTH_COOKIE_SAMESITE
             )
+            try:
+                decoded_access_token = jwt.decode(
+                    access_token, settings.SECRET_KEY, algorithms=['HS256'])
+                user_id = decoded_access_token.get('UID')
+                if user_id:
+                    user = User.objects.get(UID=user_id)
+                    user_data = CustomUserSerializer(user).data
+                    response.data['user'] = user_data
+            except (jwt.ExpiredSignatureError, jwt.InvalidTokenError, User.DoesNotExist):
+                pass
 
         return response
 
