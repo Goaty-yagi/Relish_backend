@@ -173,9 +173,11 @@ REST_FRAMEWORK = {
     ],
     # 'DEFAULT_THROTTLE_CLASSES': [
     #     'rest_framework.throttling.AnonRateThrottle',
+    #     'root.throttling.CustomUserRateThrottle'
     # ],
     # 'DEFAULT_THROTTLE_RATES': {
-    #     'anon': '10/hour',
+    #     'anon': '2/hour',
+    #     'user': '5/hour'
     # }
 }
 DJOSER = {
@@ -196,7 +198,7 @@ AUTH_COOKIE_MAX_AGE = 60 * 60 * 24 * 30  # 30 days for refresh token
 AUTH_COOKIE_SECURE = getenv('AUTH_COOKIE_SECURE', 'True') == 'True'
 AUTH_COOKIE_HTTP_ONLY = getenv('AUTH_COOKIE_HTTP_ONLY', 'True') == 'True'
 AUTH_COOKIE_PATH = '/'
-AUTH_COOKIE_SAMESITE = 'None'
+AUTH_COOKIE_SAMESITE = getenv('AUTH_COOKIE_SAMESITE', 'None')
 
 SIMPLE_JWT = {
     'SIGNING_KEY': SECRET_KEY,
