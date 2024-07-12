@@ -55,7 +55,7 @@ class BaseAward(models.Model):
 
 
 class Award(models.Model):
-    name = models.CharField(max_length=100, unique=True)
+    name = models.CharField(max_length=100)
     description = models.CharField(max_length=120)
     award_type = models.ForeignKey(
         AwardType,
