@@ -129,7 +129,10 @@ def handle_restaurant_creation(
         ).order_by('required_count').first()
         if min_required_obj:
             if min_required_obj.required_count == cuisine_type_restaurant_sum:
-                if not Award.objects.filter(base_award=min_required_obj).exists():
+                if not Award.objects.filter(
+                        base_award=min_required_obj,
+                        user_id=user,
+                        required_count=min_required_obj.required_count).exists():
                     obj = {
                         'name': min_required_obj.name,
                         'description': min_required_obj.description,
@@ -150,6 +153,7 @@ def handle_restaurant_deletion(
 
     # Handle sum type award
     max_required_award = Award.objects.filter(
+        user_id=user,
         award_type__name='sum',
         required_count__gt=restaurant_sum
     ).order_by('required_count').first()
@@ -162,6 +166,7 @@ def handle_restaurant_deletion(
     cuisine_type_restaurant_sum = Restaurant.objects.filter(
         user_id=user, cuisine_type=cuisine_type).count() - 1
     max_required_award = Award.objects.filter(
+        user_id=user,
         award_type__name='cuisine',
         cuisine_type=cuisine_type,
         required_count__gt=cuisine_type_restaurant_sum
