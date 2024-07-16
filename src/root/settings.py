@@ -176,8 +176,8 @@ REST_FRAMEWORK = {
     #     'root.throttling.CustomUserRateThrottle'
     # ],
     # 'DEFAULT_THROTTLE_RATES': {
-    #     'anon': '2/hour',
-    #     'user': '5/hour'
+    #     'anon': '50/hour',
+    #     'user': '500/min'
     # }
 }
 DJOSER = {
