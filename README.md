@@ -112,7 +112,7 @@ AWS_SES_FROM_EMAIL=''
 `post: domain/api/award-list/ `
 
 ## Restaurant endpoint
-### Get user restaurant list
+### Create a visited restaurant
 `post: domain/api/restaurant-create/`
 with data
 ```python
